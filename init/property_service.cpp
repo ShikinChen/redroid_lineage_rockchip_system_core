@@ -1238,6 +1238,8 @@ static void ProcessKernelCmdline() {
     ImportKernelCmdline([&](const std::string& key, const std::string& value) {
         if (StartsWith(key, ANDROIDBOOT_PREFIX)) {
             InitPropertySet("ro.boot." + key.substr(ANDROIDBOOT_PREFIX.size()), value);
+        } else if (StartsWith(key, "ro.")) {
+            InitPropertySet(key, value);
         }
     });
 }
